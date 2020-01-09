@@ -56,6 +56,23 @@ module.exports = appInfo => {
     credentials: true, // 允许cooke跨域
     allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS', // 请求的方法
   };
+  
+	// 配置 Session
+	config.session = {
+	  key: 'SESSION_ID', // 设置 Session cookies 里面的 key
+	  maxAge: 24 * 3600 * 1000, // 1 天
+	  httpOnly: true,
+	  encrypt: true,
+	  renew: true, // 每次刷新页面，Session 都会被延期。
+	};
+
+  // 路由中间件
+  // config.middleware = [ 'adminauth' ];
+  // config.adminauth = {
+  //   enable: true, // 是否开启该中间件，不写默认开启
+  //   match: [ '/admin/getTypeInfo' ], // 只匹配指定路由，反之如果只忽略指定路由，可以用ignore
+  //   // ignore: ['/'] // 不要与match一起使用，避免冲突
+  // };
 
   return {
     ...config,
